@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Users from './Users';
+import { Link } from 'react-router'
 
 export default class Main extends React.Component{
     constructor(){
@@ -14,7 +15,13 @@ export default class Main extends React.Component{
     componentDidMount(){
         axios.get('/api/users')
             .then(res => res.data)
-            .then(users => this.setState({ users: users }))
+            .then(users => {
+                this.setState({ 
+                    users: users,
+                    managers: users.filter(user=> user.employees.length)
+                 })
+                
+            })
     }
 
     render(){
@@ -22,8 +29,8 @@ export default class Main extends React.Component{
             <div>
                 <div>
                     <ul>
-                        <li>Users</li>
-                        <li>Managers</li>
+                        <li><Link to={'/users'}> Users </Link></li>
+                        <li><Link to={'/managers'}> Managers </Link></li>
                     </ul>
                 </div>
                 <div>
@@ -31,7 +38,7 @@ export default class Main extends React.Component{
                     React.cloneElement(this.props.children,
                     {
                         users: this.state.users,
-
+                        managers: this.state.managers
                     })
                     :
                     null

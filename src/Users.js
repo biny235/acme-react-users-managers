@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-export default class Lis extends React.Component{
+export default class Users extends React.Component{
 
     render(){
-
+        const users = this.props.users;
         return( 
             <ul>
                 {users.map(user =>{
