@@ -8,7 +8,8 @@ const sync = ()=>{
 const seed = ()=>{
     return Promise.all([
         User.create({name: "Joe"}),
-        User.create({name: "John"})
+        User.create({name: "John",  managerId: 1}),
+        User.create({name: "Moe", managerId: 1})
     ])
 }
 
